@@ -1,0 +1,20 @@
+PODS:
+  - Alamofire (5.0.2)
+  - XMLParsing (0.0.2)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.0)
+  - XMLParsing
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - XMLParsing
+
+SPEC CHECKSUMS:
+  Alamofire: 3ba7a4db18b4f62c4a1c0e1cb39d7f3d52e10ada
+  XMLParsing: b6cc40a1de8e321a72b7f0d89080473f9d53cff8
+
+PODFILE CHECKSUM: c8fb31b5fdc9556351a94d2d29edc3f5c86d0be4
+
+COCOAPODS: 1.8.4
