@@ -3,7 +3,7 @@ import SwiftUI
 
 struct SelectValute: View {
     
-    private let work = Work()
+    private let count = Count()
     
     @State
     var valute: [Valute] = []
@@ -36,19 +36,7 @@ struct SelectValute: View {
                 }
             }
         }.onAppear{
-            self.work.request(request: "/scripts/XML_daily.asp"){ (response: ValCurs<[Valute]>) in
-                self.valute = response.Valute
-                for valute in self.valute {
-                    UserDefaults.standard.string(forKey: "\(valute.CharCode)CharCode")
-                    UserDefaults.standard.integer(forKey: "\(valute.CharCode)Nominal")
-                    UserDefaults.standard.double(forKey: "\(valute.CharCode)Value")
-                    UserDefaults.standard.string(forKey: "\(valute.CharCode)CharCodeImage")
-                    UserDefaults.standard.set(flag(country: valute.CharCode) ,forKey: "\(valute.CharCode)CharCodeImage")
-                    UserDefaults.standard.set(valute.Nominal, forKey: "\(valute.CharCode)Nominal")
-                    UserDefaults.standard.set(valute.Value, forKey: "\(valute.CharCode)Value")
-                    UserDefaults.standard.set(valute.CharCode, forKey: "\(valute.CharCode)CharCode")
-                }
-            }
+            self.valute = Work.valute
         }
     }
 }

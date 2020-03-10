@@ -21,18 +21,17 @@ struct ContentView: View {
     @State
     var secondValute: String = ""
     @State
-    var textFirstValute: String = "0"
+    var textFirstValute: String = ""
     @State
-    var textSecondValute: String = "0"
+    var textSecondValute: String = ""
     @State
-    var nameValuteFirst: String = "AUD"
+    var nameValuteFirst: String = ""
     @State
-    var nameValuteSecond: String = "USD"
+    var nameValuteSecond: String = ""
     
     var body: some View {
         
         ZStack{
-            
             HStack{
                 //Valute 1
                 VStack{
@@ -120,14 +119,18 @@ struct ContentView: View {
                 }.padding(.horizontal, 28)
             }
         }.onAppear{
-            self.textSecondValute = UserDefaults.standard.string(forKey: "AUDCharCode") ?? "AUD"
-            self.textFirstValute = UserDefaults.standard.string(forKey: "USDCharCode") ?? "USD"
+            //Flags
+            self.textSecondValute = UserDefaults.standard.string(forKey: "AUDCharCodeImage") ?? "🇦🇺"
+            self.textFirstValute = UserDefaults.standard.string(forKey: "USDCharCodeImage") ?? "🇱🇷"
+            //Value
             self.firstValue = UserDefaults.standard.double(forKey: "USDValue")
             self.secondValue = UserDefaults.standard.double(forKey: "AUDValue")
-            self.nominalFirstValue = UserDefaults.standard.integer(forKey: "USDValue")
-            self.nominalSecondValue = UserDefaults.standard.integer(forKey: "AUDValue")
-            self.nameValuteSecond = UserDefaults.standard.string(forKey: "AUDCharCodeImage") ?? "🇦🇺"
-            self.nameValuteFirst = UserDefaults.standard.string(forKey: "USDCharCodeImage") ?? "🇱🇷"
+            //Nominal
+            self.nominalFirstValue = UserDefaults.standard.integer(forKey: "USDNominal")
+            self.nominalSecondValue = UserDefaults.standard.integer(forKey: "AUDNominal")
+            //CharCode
+            self.nameValuteSecond = UserDefaults.standard.string(forKey: "AUDCharCode") ?? "AUD"
+            self.nameValuteFirst = UserDefaults.standard.string(forKey: "USDCharCode") ?? "USD"
         }
     }
 }
