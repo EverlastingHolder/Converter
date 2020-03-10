@@ -1,24 +1,16 @@
-//
-//  ResponseResult.swift
-//  Converter
-//
-//  Created by admin on 10.03.2020.
-//  Copyright © 2020 admin. All rights reserved.
-//
-
 import Foundation
 
 class ResponseResult{
     
     private var valute: [Valute] = []
+    
     private let work = Work()
      
     func response (){
-        
         work.request(request: "/scripts/XML_daily.asp"){ (response: ValCurs<[Valute]>) in
             self.valute = response.Valute
             for valute in self.valute {
-
+                
                 UserDefaults.standard.string(forKey: "\(valute.CharCode)CharCode")
                 UserDefaults.standard.integer(forKey: "\(valute.CharCode)Nominal")
                 UserDefaults.standard.double(forKey: "\(valute.CharCode)Value")
@@ -31,5 +23,21 @@ class ResponseResult{
             }
             return self.valute
         }
+    }
+    
+    func getCharCodeImage() -> (String,String) {
+        (UserDefaults.standard.string(forKey: "AUDCharCodeImage") ?? "🇦🇺" , UserDefaults.standard.string(forKey: "USDCharCodeImage") ?? "🇱🇷")
+    }
+    
+    func getValue() -> (Double,Double) {
+        (UserDefaults.standard.double(forKey: "AUDValue"), UserDefaults.standard.double(forKey: "USDValue"))
+    }
+    
+    func getNominal() -> (Int, Int) {
+        (UserDefaults.standard.integer(forKey: "AUDNominal"), UserDefaults.standard.integer(forKey: "USDNominal"))
+    }
+    
+    func getCharCode() -> (String, String) {
+        (UserDefaults.standard.string(forKey: "AUDCharCode") ?? "AUD", UserDefaults.standard.string(forKey: "USDCharCode") ?? "USD")
     }
 }

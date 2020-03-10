@@ -3,6 +3,7 @@ import SwiftUI
 struct ContentView: View {
     
     private let count = Count()
+    private let responseResult = ResponseResult()
     
     @State
     var firstValue: Double = 67
@@ -70,10 +71,11 @@ struct ContentView: View {
                         .font(.system(size: 28))
                         .multilineTextAlignment(.center)
                 }.padding(.horizontal, 28)
+                
                 Text("=").foregroundColor(.gray).font(.system(size: 90))
+                
                 //Valute 2
                 VStack{
-                    
                     HStack{
                         Text(self.nameValuteSecond)
                         Button(action: {
@@ -115,20 +117,21 @@ struct ContentView: View {
             }
         }.onAppear{
             //Flags
-            self.textSecondValute = UserDefaults.standard.string(forKey: "AUDCharCodeImage") ?? "🇦🇺"
-            self.textFirstValute = UserDefaults.standard.string(forKey: "USDCharCodeImage") ?? "🇱🇷"
+            //First = USD Second = AUD
+            self.textSecondValute = self.responseResult.getCharCodeImage().0
+            self.textFirstValute = self.responseResult.getCharCodeImage().1
             
             //Value
-            self.firstValue = UserDefaults.standard.double(forKey: "USDValue")
-            self.secondValue = UserDefaults.standard.double(forKey: "AUDValue")
+            self.secondValue = self.responseResult.getValue().0
+            self.firstValue = self.responseResult.getValue().1
             
             //Nominal
-            self.nominalFirstValue = UserDefaults.standard.integer(forKey: "USDNominal")
-            self.nominalSecondValue = UserDefaults.standard.integer(forKey: "AUDNominal")
+            self.nominalSecondValue = self.responseResult.getNominal().0
+            self.nominalFirstValue = self.responseResult.getNominal().1
             
             //CharCode
-            self.nameValuteSecond = UserDefaults.standard.string(forKey: "AUDCharCode") ?? "AUD"
-            self.nameValuteFirst = UserDefaults.standard.string(forKey: "USDCharCode") ?? "USD"
+            self.nameValuteSecond = self.responseResult.getCharCode().0
+            self.nameValuteFirst = self.responseResult.getCharCode().1
         }
     }
 }

@@ -69,20 +69,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		843E38BF24175ACE00C2A8A9 /* Api */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Api;
-			sourceTree = "<group>";
-		};
-		843E38C024175AF200C2A8A9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		84DCAF672412189700234BEC = {
 			isa = PBXGroup;
 			children = (
@@ -104,8 +90,6 @@
 		84DCAF722412189700234BEC /* Converter */ = {
 			isa = PBXGroup;
 			children = (
-				843E38BF24175ACE00C2A8A9 /* Api */,
-				843E38C024175AF200C2A8A9 /* View */,
 				84DCAF732412189700234BEC /* AppDelegate.swift */,
 				84DCAF772412189700234BEC /* ContentView.swift */,
 				84D52916241368B400701308 /* SelectValute.swift */,
