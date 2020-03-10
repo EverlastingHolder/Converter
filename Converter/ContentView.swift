@@ -5,10 +5,6 @@ struct ContentView: View {
     private let count = Count()
     
     @State
-    var act: Bool = false
-    @State
-    var isActive: Bool = false
-    @State
     var firstValue: Double = 67
     @State
     var secondValue: Double = 44
@@ -28,6 +24,8 @@ struct ContentView: View {
     var nameValuteFirst: String = ""
     @State
     var nameValuteSecond: String = ""
+    @State
+    var text: String = ""
     
     var body: some View {
         
@@ -35,24 +33,22 @@ struct ContentView: View {
             HStack{
                 //Valute 1
                 VStack{
-                    
                     HStack{
                         Button(action: {
-                            self.isActive = true
+                            
+                            let hostingController = UIHostingController(rootView: SelectValute(
+                                    nominal: self.$nominalFirstValue,
+                                    valure: self.$firstValue,
+                                    name: self.$nameValuteFirst,
+                                    valuteImage: self.$textFirstValute))
+
+                            SceneDelegate.sceneDelegate.window?.rootViewController?.present(hostingController, animated: true)
+                            
                         }){
-                            Text(self.textFirstValute).font(.system(size: 36))
+                            Text(self.textFirstValute).font(.system(size: 46))
                         }
                         Text(self.nameValuteFirst)
                     }
-                        
-                    .sheet(isPresented: self.$isActive, content: {
-                        SelectValute(
-                            nominal: self.$nominalFirstValue,
-                            valure: self.$firstValue,
-                            isActive: self.$isActive,
-                            name: self.$nameValuteFirst,
-                            valuteImage: self.$textFirstValute)
-                    })
                     
                     TextField("0", text:  Binding(get: {
                         
@@ -81,20 +77,19 @@ struct ContentView: View {
                     HStack{
                         Text(self.nameValuteSecond)
                         Button(action: {
-                            self.act = true
+
+                            let hostingController = UIHostingController(rootView: SelectValute(
+                                nominal: self.$nominalSecondValue,
+                                valure: self.$secondValue,
+                                name: self.$nameValuteSecond,
+                                valuteImage: self.$textSecondValute))
+                            
+                            SceneDelegate.sceneDelegate.window?.rootViewController?.present(hostingController, animated: true)
+                            
                         }){
-                            Text(self.textSecondValute).font(.system(size: 36))
+                            Text(self.textSecondValute).font(.system(size: 46))
                         }
                     }
-                    
-                    .sheet(isPresented: self.$act, content: {
-                        SelectValute(
-                            nominal: self.$nominalSecondValue,
-                            valure: self.$secondValue,
-                            isActive: self.$act,
-                            name: self.$nameValuteSecond,
-                            valuteImage: self.$textSecondValute)
-                    })
                     
                     TextField("0",text: Binding(get: {
                         
@@ -122,12 +117,15 @@ struct ContentView: View {
             //Flags
             self.textSecondValute = UserDefaults.standard.string(forKey: "AUDCharCodeImage") ?? "🇦🇺"
             self.textFirstValute = UserDefaults.standard.string(forKey: "USDCharCodeImage") ?? "🇱🇷"
+            
             //Value
             self.firstValue = UserDefaults.standard.double(forKey: "USDValue")
             self.secondValue = UserDefaults.standard.double(forKey: "AUDValue")
+            
             //Nominal
             self.nominalFirstValue = UserDefaults.standard.integer(forKey: "USDNominal")
             self.nominalSecondValue = UserDefaults.standard.integer(forKey: "AUDNominal")
+            
             //CharCode
             self.nameValuteSecond = UserDefaults.standard.string(forKey: "AUDCharCode") ?? "AUD"
             self.nameValuteFirst = UserDefaults.standard.string(forKey: "USDCharCode") ?? "USD"

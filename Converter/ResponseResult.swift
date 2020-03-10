@@ -14,6 +14,7 @@ class ResponseResult{
     private let work = Work()
      
     func response (){
+        
         work.request(request: "/scripts/XML_daily.asp"){ (response: ValCurs<[Valute]>) in
             self.valute = response.Valute
             for valute in self.valute {
